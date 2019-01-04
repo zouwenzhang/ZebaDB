@@ -1,4 +1,4 @@
-package zwz.core.db;
+package com.zeba.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import zwz.core.db.annotation.DbColumn;
+import com.zeba.db.annotation.DbColumn;
 
 public class ZDbInitUtil {
 

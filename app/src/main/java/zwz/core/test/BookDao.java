@@ -1,8 +1,8 @@
 package zwz.core.test;
 
-import zwz.core.db.DbRepository;
+import com.zeba.db.DbSimpleRepository;
 
-public class BookDao extends DbRepository<BookRecord> {
+public class BookDao extends DbSimpleRepository<BookRecord> {
     private static BookDao instance;
 
     public static BookDao get(){

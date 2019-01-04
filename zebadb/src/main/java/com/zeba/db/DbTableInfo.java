@@ -1,4 +1,4 @@
-package zwz.core.db;
+package com.zeba.db;
 
 import android.content.ContentValues;
 
@@ -6,8 +6,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import zwz.core.db.annotation.DbColumn;
-import zwz.core.db.annotation.DbTable;
+import com.zeba.db.annotation.DbColumn;
+import com.zeba.db.annotation.DbTable;
 
 public class DbTableInfo {
     private String tableName;

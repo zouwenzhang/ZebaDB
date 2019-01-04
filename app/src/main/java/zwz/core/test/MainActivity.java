@@ -2,15 +2,15 @@ package zwz.core.test;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import core.zwz.zwzcoredb.R;
-import zwz.core.db.ZDbQuery;
-import zwz.core.db.ZDbWhere;
+
+import com.zeba.db.ZDbWhere;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         tvLog=findViewById(R.id.tv_log);
         BookDao.get().init(getApplication(),"mb",1);
         addOne();
-
     }
 
     private void addOne(){
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             record.setName("aaa"+i);
             record.setBookType(i+1);
             record.setBookTime("123"+i);
+            list.add(record);
         }
         BookDao.get().addList(list,(r)->{
             tvLog.setText(tvLog.getText()+"addList OK\n");
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         BookDao.get().findOne(new ZDbWhere("time").equ("123"),(data)->{
             if(data!=null){
                 tvLog.setText(tvLog.getText()+"findOne OK\n");
+                findAll();
             }
-            findAll();
         },(msg)->{
             tvLog.setText(tvLog.getText()+"findOne Error:"+msg+"\n");
         });
@@ -69,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
     private void findAll(){
         BookDao.get().findAll((data)->{
             if(data!=null){
-                tvLog.setText(tvLog.getText()+"findAll OK count:"+data.getCount()+"\n");
+                List<BookRecord> list=data.getData();
+                for(int i=0;i<list.size();i++){
+                    tvLog.setText(tvLog.getText()+"name:"+list.get(i).getName()+"\n");
+                }
+                tvLog.setText(tvLog.getText()+"findAll OK count:"+data.getCount()+","+data.getData().size()+"\n");
             }
         },(msg)->{
             tvLog.setText(tvLog.getText()+"findAll Error:"+msg+"\n");

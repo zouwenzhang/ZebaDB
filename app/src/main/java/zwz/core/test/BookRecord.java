@@ -1,9 +1,9 @@
 package zwz.core.test;
 
-import zwz.core.db.BaseRecord;
-import zwz.core.db.annotation.DbColumn;
-import zwz.core.db.annotation.DbColumnType;
-import zwz.core.db.annotation.DbTable;
+import com.zeba.db.BaseRecord;
+import com.zeba.db.annotation.DbColumn;
+import com.zeba.db.annotation.DbColumnType;
+import com.zeba.db.annotation.DbTable;
 
 @DbTable("book")
 public class BookRecord extends BaseRecord{

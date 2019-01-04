@@ -1,10 +1,14 @@
-package zwz.core.db;
+package com.zeba.db;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.Looper;
+
+import com.zeba.db.annotation.DbColumn;
+import com.zeba.db.listener.DbErrorCB;
+import com.zeba.db.listener.DbSuccessCB;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,18 +21,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import zwz.core.db.annotation.DbColumn;
-import zwz.core.db.listener.DbErrorCB;
-import zwz.core.db.listener.DbSuccessCB;
-
-public abstract class DbBaseRepository<T extends BaseRecord>{
+public abstract class DbBaseMultiRepository<T extends BaseRecord>{
     private Class<T> mClass;
     private DbTableInfo tableInfo;
     private ExecutorService executorService = Executors.newCachedThreadPool();
     private SQLiteDatabase sqLiteDatabase;
     private SQLiteOpenHelper sqLiteOpenHelper;
 
-    public DbBaseRepository(){
+    public DbBaseMultiRepository(){
         tableInfo=new DbTableInfo(getRecordClass());
         initDB();
     }

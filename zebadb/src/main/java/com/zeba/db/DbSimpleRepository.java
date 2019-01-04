@@ -1,10 +1,10 @@
-package zwz.core.db;
+package com.zeba.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DbRepository<T extends BaseRecord> extends DbBaseRepository<T>{
+public class DbSimpleRepository<T extends BaseRecord> extends DbBaseSimpleRepository<T> {
 
     private SQLiteOpenHelper sqLiteOpenHelper;
 

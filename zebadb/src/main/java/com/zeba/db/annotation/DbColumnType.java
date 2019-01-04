@@ -1,4 +1,4 @@
-package zwz.core.db.annotation;
+package com.zeba.db.annotation;
 
 public enum DbColumnType implements DbColumnTypeInterface {
     INTEGER("INTEGER"), TEXT("TEXT");

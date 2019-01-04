@@ -1,4 +1,4 @@
-package zwz.core.db;
+package com.zeba.db;
 
 import java.util.List;
 

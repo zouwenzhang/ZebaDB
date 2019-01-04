@@ -1,4 +1,4 @@
-package zwz.core.db;
+package com.zeba.db;
 
 public class BaseRecord {
     public final static String ID_NAME="base_id";

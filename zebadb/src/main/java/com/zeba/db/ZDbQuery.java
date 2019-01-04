@@ -1,4 +1,4 @@
-package zwz.core.db;
+package com.zeba.db;
 
 public class ZDbQuery{
     private ZDbWhere zDbWhere;
