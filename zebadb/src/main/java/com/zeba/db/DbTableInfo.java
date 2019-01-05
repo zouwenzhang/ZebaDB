@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zeba.db.annotation.DbColumn;
+import com.zeba.db.annotation.DbColumnType;
 import com.zeba.db.annotation.DbTable;
 
 public class DbTableInfo {
@@ -111,11 +112,17 @@ public class DbTableInfo {
                 }
                 Object v= fieldList.get(i).get(obj);
                 if(v instanceof String){
-                    cv.put(column.name(),(String)v);
+                    if(column.type().getType().equals(DbColumnType.BLOB.getType())){
+                        cv.put(column.name(),((String)v).getBytes("utf-8"));
+                    }else{
+                        cv.put(column.name(),(String)v);
+                    }
                 }else if(v instanceof Integer){
                     cv.put(column.name(),(Integer) v);
                 }else if(v instanceof Long){
                     cv.put(column.name(),(Long)v);
+                }else if(v instanceof byte[]){
+                    cv.put(column.name(),(byte[]) v);
                 }
             }
         }catch (Exception e){

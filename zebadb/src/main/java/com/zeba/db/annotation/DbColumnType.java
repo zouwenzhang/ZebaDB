@@ -1,7 +1,7 @@
 package com.zeba.db.annotation;
 
 public enum DbColumnType implements DbColumnTypeInterface {
-    INTEGER("INTEGER"), TEXT("TEXT");
+    INTEGER("INTEGER"), TEXT("TEXT"),FLOAT("FLOAT"),BLOB("BLOB");
 
     // 成员变量
     private String type;

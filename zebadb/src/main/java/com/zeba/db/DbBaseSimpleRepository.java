@@ -126,8 +126,13 @@ public abstract class DbBaseSimpleRepository<T extends BaseRecord>{
         findList(new ZDbQuery().count(1).index(1).where(where), new DbSuccessCB<DbListData<T>>() {
             @Override
             public void success(DbListData<T> tDbListData) {
-                if(tDbListData!=null&&tDbListData.getData().size()!=0&&successCB!=null){
+                if(successCB==null){
+                    return;
+                }
+                if(tDbListData!=null&&tDbListData.getData().size()!=0){
                     successCB.success(tDbListData.getData().get(0));
+                }else{
+                    successCB.success(null);
                 }
             }
         },errorCB);
@@ -163,17 +168,32 @@ public abstract class DbBaseSimpleRepository<T extends BaseRecord>{
                                 if(BaseRecord.ID_NAME.equals(column.name())){
                                     isFindId=true;
                                 }
+                                Field field=fields.get(i);
                                 switch(cursor.getType(index)){
                                     case Cursor.FIELD_TYPE_INTEGER:
-                                        if(fields.get(i).getType()==Integer.class){
-                                            fields.get(i).set(t,cursor.getInt(index));
-                                        }else if(fields.get(i).getType()==Long.class){
-                                            fields.get(i).set(t,cursor.getLong(index));
+                                        if(field.getType()==Integer.class){
+                                            field.set(t,cursor.getInt(index));
+                                        }else if(field.getType()==Long.class){
+                                            field.set(t,cursor.getLong(index));
                                         }
                                         break;
                                     case Cursor.FIELD_TYPE_STRING:
-                                        if(fields.get(i).getType()==String.class){
-                                            fields.get(i).set(t,cursor.getString(index));
+                                        if(field.getType()==String.class){
+                                            field.set(t,cursor.getString(index));
+                                        }
+                                        break;
+                                    case Cursor.FIELD_TYPE_FLOAT:
+                                        if(field.getType()==Float.class){
+                                            field.set(t,cursor.getFloat(index));
+                                        }else if(fields.get(i).getType()==Double.class){
+                                            field.set(t,cursor.getDouble(index));
+                                        }
+                                        break;
+                                    case Cursor.FIELD_TYPE_BLOB:
+                                        if(field.getType()==byte[].class){
+                                            field.set(t,cursor.getBlob(index));
+                                        }else if(field.getType()==String.class){
+                                            field.set(t,new String(cursor.getBlob(index),"utf-8"));
                                         }
                                         break;
                                 }

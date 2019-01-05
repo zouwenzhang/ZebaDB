@@ -26,33 +26,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addOne(){
-        BookRecord record=new BookRecord();
-        record.setName("aaa");
-        record.setBookType(1);
-        record.setBookTime("123");
-        BookDao.get().addOne(record,(r)->{
-            tvLog.setText(tvLog.getText()+"addOne OK\n");
-            addList();
-        },(msg)->{
-            tvLog.setText(tvLog.getText()+"addOne Error:"+msg+"\n");
-        });
+        try{
+            BookRecord record=new BookRecord();
+            record.setName("aaa");
+            record.setBookType(1);
+            record.setBookTime("123");
+            record.setBookData("teset");
+            record.setBookDataByte("tesetbyte".getBytes("utf-8"));
+            BookDao.get().addOne(record,(r)->{
+                tvLog.setText(tvLog.getText()+"addOne OK\n");
+                addList();
+            },(msg)->{
+                tvLog.setText(tvLog.getText()+"addOne Error:"+msg+"\n");
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void addList(){
-        List<BookRecord> list=new ArrayList<>();
-        for(int i=0;i<2;i++){
-            BookRecord record=new BookRecord();
-            record.setName("aaa"+i);
-            record.setBookType(i+1);
-            record.setBookTime("123"+i);
-            list.add(record);
+        try {
+            List<BookRecord> list=new ArrayList<>();
+            for(int i=0;i<2;i++){
+                BookRecord record=new BookRecord();
+                record.setName("aaa"+i);
+                record.setBookType(i+1);
+                record.setBookTime("123"+i);
+                record.setBookData("teset"+i);
+                record.setBookDataByte((i+"tesetbyte").getBytes("utf-8"));
+                list.add(record);
+            }
+            BookDao.get().addList(list,(r)->{
+                tvLog.setText(tvLog.getText()+"addList OK\n");
+                findOne();
+            },(msg)->{
+                tvLog.setText(tvLog.getText()+"addList Error:"+msg+"\n");
+            });
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        BookDao.get().addList(list,(r)->{
-            tvLog.setText(tvLog.getText()+"addList OK\n");
-            findOne();
-        },(msg)->{
-            tvLog.setText(tvLog.getText()+"addList Error:"+msg+"\n");
-        });
     }
 
     private void findOne(){
@@ -71,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             if(data!=null){
                 List<BookRecord> list=data.getData();
                 for(int i=0;i<list.size();i++){
-                    tvLog.setText(tvLog.getText()+"name:"+list.get(i).getName()+"\n");
+                    tvLog.setText(tvLog.getText()+"a1:"+list.get(i).getBookData()+"a2:"+list.get(i).getBookDataByteString()+"\n");
                 }
                 tvLog.setText(tvLog.getText()+"findAll OK count:"+data.getCount()+","+data.getData().size()+"\n");
             }
