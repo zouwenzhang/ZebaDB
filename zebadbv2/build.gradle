@@ -2,29 +2,32 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api 'org.zeba:orm-base:1.1.9'
 }
 
 uploadArchives {
@@ -36,7 +39,7 @@ uploadArchives {
             pom.project{
                 groupId = "org.zeba"// 唯一标识（通常为模块包名，也可以任意）
                 artifactId = "android-db" // 项目名称（通常为类库模块名称，也可以任意）
-                version = "1.0.1" // 版本号
+                version = "2.0.1" // 版本号
             }
         }
     }

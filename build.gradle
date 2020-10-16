@@ -19,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {url 'http://maven.zeba.group:8020/archiva/repository/internal/'}
     }
 }
 

@@ -1,1 +1,2 @@
+include ':zebadbv2'
 include ':app', ':zebadb'

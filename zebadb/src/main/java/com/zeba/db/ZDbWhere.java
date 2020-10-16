@@ -72,31 +72,31 @@ public class ZDbWhere {
 
     /**大于>*/
     public ZDbWhere gt(Object value){
-        append(value.toString(),">");
+        append(value,">");
         return this;
     }
 
     /**小于<*/
     public ZDbWhere lt(Object value){
-        append(value.toString(),"<");
+        append(value,"<");
         return this;
     }
 
     /**大于等于>=*/
     public ZDbWhere gte(Object value){
-        append(value.toString(),">=");
+        append(value,">=");
         return this;
     }
 
     /**小于等于<=*/
     public ZDbWhere lte(Object value){
-        append(value.toString(),"<=");
+        append(value,"<=");
         return this;
     }
 
     /**不等于!=*/
-    public ZDbWhere nte(Object value){
-        append(value.toString(),"!=");
+    public ZDbWhere neq(Object value){
+        append(value,"!=");
         return this;
     }
 

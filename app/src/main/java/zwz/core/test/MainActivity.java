@@ -11,6 +11,7 @@ import java.util.List;
 import core.zwz.zwzcoredb.R;
 
 import com.zeba.db.ZDbWhere;
+import com.zeba.db.sl.ZebaSQLite;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvLog=findViewById(R.id.tv_log);
-        BookDao.get().init(getApplication(),"mb",1);
-        addOne();
+//        BookDao.get().init(getApplication(),"mb",1);
+//        addOne();
+        ZebaSQLite.init(this,"dd");
+        new TestDb2().test(tvLog);
     }
 
     private void addOne(){
